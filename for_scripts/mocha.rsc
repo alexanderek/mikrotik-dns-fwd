@@ -1,4 +1,4 @@
 :global AddressList
 :global ForwardTo
 /ip dns static
-:if ([:len [find name="mochajs.org"]] = 0) do={ add address-list=$AddressList forward-to=$ForwardTo comment="mocha" match-subdomain=yes type=FWD name="mochajs.org" }
+:if ([:len [find name="mochajs.org"]] = 0) do={ add address-list=$AddressList forward-to=$ForwardTo comment="dnsfwd:auto:mocha" match-subdomain=yes type=FWD name="mochajs.org" }

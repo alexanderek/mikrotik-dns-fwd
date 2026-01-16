@@ -1,4 +1,4 @@
 :global AddressList
 :global ForwardTo
 /ip dns static
-:if ([:len [find name="sourcehut.org"]] = 0) do={ add address-list=$AddressList forward-to=$ForwardTo comment="sourcehut" match-subdomain=yes type=FWD name="sourcehut.org" }
+:if ([:len [find name="sourcehut.org"]] = 0) do={ add address-list=$AddressList forward-to=$ForwardTo comment="dnsfwd:auto:sourcehut" match-subdomain=yes type=FWD name="sourcehut.org" }

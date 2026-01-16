@@ -1,4 +1,4 @@
 :global AddressList
 :global ForwardTo
 /ip dns static
-:if ([:len [find name="cmbwinglungbank.com"]] = 0) do={ add address-list=$AddressList forward-to=$ForwardTo comment="cmb@!cn" match-subdomain=yes type=FWD name="cmbwinglungbank.com" }
+:if ([:len [find name="cmbwinglungbank.com"]] = 0) do={ add address-list=$AddressList forward-to=$ForwardTo comment="dnsfwd:auto:cmb@!cn" match-subdomain=yes type=FWD name="cmbwinglungbank.com" }

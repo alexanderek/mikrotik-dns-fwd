@@ -1,4 +1,4 @@
 :global AddressList
 :global ForwardTo
 /ip dns static
-:if ([:len [find name="static.hotjar.com"]] = 0) do={ add address-list=$AddressList forward-to=$ForwardTo comment="hotjar-ads" match-subdomain=yes type=FWD name="static.hotjar.com" }
+:if ([:len [find name="static.hotjar.com"]] = 0) do={ add address-list=$AddressList forward-to=$ForwardTo comment="dnsfwd:auto:hotjar-ads" match-subdomain=yes type=FWD name="static.hotjar.com" }
