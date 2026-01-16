@@ -6,6 +6,24 @@ Domains are collected full from two sources
 
 If the resource name matches, domains from MetaCubeX take priority.
 
+## RouterOS loader scripts
+
+Prebuilt loaders:
+- `routeros/loader_eu.rsc`
+- `routeros/loader_ru.rsc`
+
+SyncMode:
+- `add` keeps existing manual rules and only appends new entries.
+- `sync` removes only `dnsfwd:auto:*` entries within the current `AddressList` before applying a validated file.
+
+Example (EU):
+```routeros
+:global AddressList "blacklist_eu"
+:global ForwardTo "fakeipEU"
+:global SyncMode "add"
+:local baseUrl "https://raw.githubusercontent.com/alexanderek/MikroTik_DNS_FWD/refs/heads/main/for_scripts"
+```
+
 ## Example usage
 
 ### scrirt FWD_EU
