@@ -160,6 +160,16 @@ The workflow is autonomous and does not require manual intervention.
 
 ---
 
+## 📂 Domain lists index
+
+`for_scripts/` is large and GitHub may truncate the directory view in the web UI.
+Use the index files for a full listing:
+
+* [for_scripts/index.md](for_scripts/index.md)
+* [for_scripts/index.json](for_scripts/index.json)
+
+---
+
 ## ⚠️ Notes
 
 * Some `fetch` 404 logs are expected due to `partN` probing
