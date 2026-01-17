@@ -7,7 +7,7 @@
 :if ([:len [find name="host.livekit.cloud"]] = 0) do={ add address-list=$AddressList forward-to=$ForwardTo comment="dnsfwd:auto:openai" match-subdomain=yes type=FWD name="host.livekit.cloud" }
 :if ([:len [find name="oaistatic.com"]] = 0) do={ add address-list=$AddressList forward-to=$ForwardTo comment="dnsfwd:auto:openai" match-subdomain=yes type=FWD name="oaistatic.com" }
 :if ([:len [find name="oaiusercontent.com"]] = 0) do={ add address-list=$AddressList forward-to=$ForwardTo comment="dnsfwd:auto:openai" match-subdomain=yes type=FWD name="oaiusercontent.com" }
-#:if ([:len [find name="openai.com"]] = 0) do={ add address-list=$AddressList forward-to=$ForwardTo comment="dnsfwd:auto:openai" match-subdomain=yes type=FWD name="openai.com" }
+:if ([:len [find name="openai.com"]] = 0) do={ add address-list=$AddressList forward-to=$ForwardTo comment="dnsfwd:auto:openai" match-subdomain=yes type=FWD name="openai.com" }
 :if ([:len [find name="openai.com.cdn.cloudflare.net"]] = 0) do={ add address-list=$AddressList forward-to=$ForwardTo comment="dnsfwd:auto:openai" match-subdomain=yes type=FWD name="openai.com.cdn.cloudflare.net" }
 :if ([:len [find name="sora.com"]] = 0) do={ add address-list=$AddressList forward-to=$ForwardTo comment="dnsfwd:auto:openai" match-subdomain=yes type=FWD name="sora.com" }
 :if ([:len [find name="turn.livekit.cloud"]] = 0) do={ add address-list=$AddressList forward-to=$ForwardTo comment="dnsfwd:auto:openai" match-subdomain=yes type=FWD name="turn.livekit.cloud" }
