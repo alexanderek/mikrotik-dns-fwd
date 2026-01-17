@@ -25,6 +25,7 @@
   :local wouldAdopt 0
   :local skipped 0
   :local logged 0
+  :local debugLogged false
   :local tag ("dnsfwd:auto:" . $resource)
 
   :local url "$baseUrl/$resource.rsc"
@@ -35,105 +36,99 @@
       :if (([:find $content "/ip dns static"] != -1) && ([:find $content " add address-list="] != -1)) do={
         :local seenNames "|"
         :local seenRegex "|"
-        :foreach line in=[:toarray $content] do={
-          :if ([:find $line " add "] != -1) do={
-            :local name ""
-            :local regexp ""
 
-            :local nameKey " name="
-            :local nameIdx [:find $line $nameKey]
-            :if ($nameIdx != -1) do={
-              :local nameStart ($nameIdx + [:len $nameKey])
-              :local nameEnd -1
-              :if ([:pick $line $nameStart] = "\"") do={
-                :set nameStart ($nameStart + 1)
-                :set nameEnd [:find $line "\"" $nameStart]
-              } else={
-                :set nameEnd [:find $line " " $nameStart]
-              }
-              :if ($nameEnd = -1) do={ :set nameEnd [:len $line] }
-              :set name [:pick $line $nameStart $nameEnd]
-            }
+        :local pos 0
+        :while (true) do={
+          :local idx [:find $content "name=\"" $pos]
+          :if ($idx = -1) do={ :break }
+          :local start ($idx + 6)
+          :local end [:find $content "\"" $start]
+          :if ($end = -1) do={ :break }
+          :local name [:pick $content $start $end]
 
-            :local reKey " regexp="
-            :local reIdx [:find $line $reKey]
-            :if ($reIdx != -1) do={
-              :local reStart ($reIdx + [:len $reKey])
-              :local reEnd -1
-              :if ([:pick $line $reStart] = "\"") do={
-                :set reStart ($reStart + 1)
-                :set reEnd [:find $line "\"" $reStart]
-              } else={
-                :set reEnd [:find $line " " $reStart]
-              }
-              :if ($reEnd = -1) do={ :set reEnd [:len $line] }
-              :set regexp [:pick $line $reStart $reEnd]
-            }
+          :if (($VerboseLimit > 0) && (!$debugLogged)) do={
+            :log info ("DEBUG extracted name=" . $name)
+            :set debugLogged true
+          }
 
-            :if ($name != "") do={
-              :if ([:find $seenNames ("|" . $name . "|")] = -1) do={
-                :set seenNames ($seenNames . $name . "|")
-                :local ids [/ip dns static find where name=$name and address-list=$AddressList and type=FWD and forward-to=$ForwardTo]
-                :if ([:len $ids] > 0) do={
-                  :foreach id in=$ids do={
-                    :local comment [/ip dns static get $id comment]
-                    :if ([:pick $comment 0 12] != "dnsfwd:auto:") do={
-                      :if ($DryRun = "true") do={
-                        :if (($VerboseLimit > 0) && ($logged < $VerboseLimit)) do={
-                          :log info ("WOULD ADOPT " . $name . " -> " . $tag)
-                          :set logged ($logged + 1)
-                        }
-                        :set wouldAdopt ($wouldAdopt + 1)
-                      } else={
-                        /ip dns static set $id comment=$tag
-                        :if (($VerboseLimit > 0) && ($logged < $VerboseLimit)) do={
-                          :log info ("ADOPTED " . $name . " -> " . $tag)
-                          :set logged ($logged + 1)
-                        }
-                        :set adopted ($adopted + 1)
-                      }
-                    } else={
-                      :set skipped ($skipped + 1)
+          :if ([:find $seenNames ("|" . $name . "|")] = -1) do={
+            :set seenNames ($seenNames . $name . "|")
+            :local ids [/ip dns static find where name=$name and address-list=$AddressList and type=FWD and forward-to=$ForwardTo]
+            :if ([:len $ids] > 0) do={
+              :foreach id in=$ids do={
+                :local comment [/ip dns static get $id comment]
+                :if ([:pick $comment 0 12] != "dnsfwd:auto:") do={
+                  :if ($DryRun = "true") do={
+                    :if (($VerboseLimit > 0) && ($logged < $VerboseLimit)) do={
+                      :log info ("WOULD ADOPT " . $name . " -> " . $tag)
+                      :set logged ($logged + 1)
                     }
+                    :set wouldAdopt ($wouldAdopt + 1)
+                  } else={
+                    /ip dns static set $id comment=$tag
+                    :if (($VerboseLimit > 0) && ($logged < $VerboseLimit)) do={
+                      :log info ("ADOPTED " . $name . " -> " . $tag)
+                      :set logged ($logged + 1)
+                    }
+                    :set adopted ($adopted + 1)
                   }
                 } else={
                   :set skipped ($skipped + 1)
                 }
               }
-            }
-
-            :if ($regexp != "") do={
-              :if ([:find $seenRegex ("|" . $regexp . "|")] = -1) do={
-                :set seenRegex ($seenRegex . $regexp . "|")
-                :local ids [/ip dns static find where regexp=$regexp and address-list=$AddressList and type=FWD and forward-to=$ForwardTo]
-                :if ([:len $ids] > 0) do={
-                  :foreach id in=$ids do={
-                    :local comment [/ip dns static get $id comment]
-                    :if ([:pick $comment 0 12] != "dnsfwd:auto:") do={
-                      :if ($DryRun = "true") do={
-                        :if (($VerboseLimit > 0) && ($logged < $VerboseLimit)) do={
-                          :log info ("WOULD ADOPT " . $regexp . " -> " . $tag)
-                          :set logged ($logged + 1)
-                        }
-                        :set wouldAdopt ($wouldAdopt + 1)
-                      } else={
-                        /ip dns static set $id comment=$tag
-                        :if (($VerboseLimit > 0) && ($logged < $VerboseLimit)) do={
-                          :log info ("ADOPTED " . $regexp . " -> " . $tag)
-                          :set logged ($logged + 1)
-                        }
-                        :set adopted ($adopted + 1)
-                      }
-                    } else={
-                      :set skipped ($skipped + 1)
-                    }
-                  }
-                } else={
-                  :set skipped ($skipped + 1)
-                }
-              }
+            } else={
+              :set skipped ($skipped + 1)
             }
           }
+
+          :set pos ($end + 1)
+        }
+
+        :set pos 0
+        :while (true) do={
+          :local idx [:find $content "regexp=\"" $pos]
+          :if ($idx = -1) do={ :break }
+          :local start ($idx + 8)
+          :local end [:find $content "\"" $start]
+          :if ($end = -1) do={ :break }
+          :local regexp [:pick $content $start $end]
+
+          :if (($VerboseLimit > 0) && (!$debugLogged)) do={
+            :log info ("DEBUG extracted regexp=" . $regexp)
+            :set debugLogged true
+          }
+
+          :if ([:find $seenRegex ("|" . $regexp . "|")] = -1) do={
+            :set seenRegex ($seenRegex . $regexp . "|")
+            :local ids [/ip dns static find where regexp=$regexp and address-list=$AddressList and type=FWD and forward-to=$ForwardTo]
+            :if ([:len $ids] > 0) do={
+              :foreach id in=$ids do={
+                :local comment [/ip dns static get $id comment]
+                :if ([:pick $comment 0 12] != "dnsfwd:auto:") do={
+                  :if ($DryRun = "true") do={
+                    :if (($VerboseLimit > 0) && ($logged < $VerboseLimit)) do={
+                      :log info ("WOULD ADOPT " . $regexp . " -> " . $tag)
+                      :set logged ($logged + 1)
+                    }
+                    :set wouldAdopt ($wouldAdopt + 1)
+                  } else={
+                    /ip dns static set $id comment=$tag
+                    :if (($VerboseLimit > 0) && ($logged < $VerboseLimit)) do={
+                      :log info ("ADOPTED " . $regexp . " -> " . $tag)
+                      :set logged ($logged + 1)
+                    }
+                    :set adopted ($adopted + 1)
+                  }
+                } else={
+                  :set skipped ($skipped + 1)
+                }
+              }
+            } else={
+              :set skipped ($skipped + 1)
+            }
+          }
+
+          :set pos ($end + 1)
         }
       }
     }
@@ -150,105 +145,99 @@
         :if (([:find $content "/ip dns static"] != -1) && ([:find $content " add address-list="] != -1)) do={
           :local seenNames "|"
           :local seenRegex "|"
-          :foreach line in=[:toarray $content] do={
-            :if ([:find $line " add "] != -1) do={
-              :local name ""
-              :local regexp ""
 
-              :local nameKey " name="
-              :local nameIdx [:find $line $nameKey]
-              :if ($nameIdx != -1) do={
-                :local nameStart ($nameIdx + [:len $nameKey])
-                :local nameEnd -1
-                :if ([:pick $line $nameStart] = "\"") do={
-                  :set nameStart ($nameStart + 1)
-                  :set nameEnd [:find $line "\"" $nameStart]
-                } else={
-                  :set nameEnd [:find $line " " $nameStart]
-                }
-                :if ($nameEnd = -1) do={ :set nameEnd [:len $line] }
-                :set name [:pick $line $nameStart $nameEnd]
-              }
+          :local pos 0
+          :while (true) do={
+            :local idx [:find $content "name=\"" $pos]
+            :if ($idx = -1) do={ :break }
+            :local start ($idx + 6)
+            :local end [:find $content "\"" $start]
+            :if ($end = -1) do={ :break }
+            :local name [:pick $content $start $end]
 
-              :local reKey " regexp="
-              :local reIdx [:find $line $reKey]
-              :if ($reIdx != -1) do={
-                :local reStart ($reIdx + [:len $reKey])
-                :local reEnd -1
-                :if ([:pick $line $reStart] = "\"") do={
-                  :set reStart ($reStart + 1)
-                  :set reEnd [:find $line "\"" $reStart]
-                } else={
-                  :set reEnd [:find $line " " $reStart]
-                }
-                :if ($reEnd = -1) do={ :set reEnd [:len $line] }
-                :set regexp [:pick $line $reStart $reEnd]
-              }
+            :if (($VerboseLimit > 0) && (!$debugLogged)) do={
+              :log info ("DEBUG extracted name=" . $name)
+              :set debugLogged true
+            }
 
-              :if ($name != "") do={
-                :if ([:find $seenNames ("|" . $name . "|")] = -1) do={
-                  :set seenNames ($seenNames . $name . "|")
-                  :local ids [/ip dns static find where name=$name and address-list=$AddressList and type=FWD and forward-to=$ForwardTo]
-                  :if ([:len $ids] > 0) do={
-                    :foreach id in=$ids do={
-                      :local comment [/ip dns static get $id comment]
-                      :if ([:pick $comment 0 12] != "dnsfwd:auto:") do={
-                        :if ($DryRun = "true") do={
-                          :if (($VerboseLimit > 0) && ($logged < $VerboseLimit)) do={
-                            :log info ("WOULD ADOPT " . $name . " -> " . $tag)
-                            :set logged ($logged + 1)
-                          }
-                          :set wouldAdopt ($wouldAdopt + 1)
-                        } else={
-                          /ip dns static set $id comment=$tag
-                          :if (($VerboseLimit > 0) && ($logged < $VerboseLimit)) do={
-                            :log info ("ADOPTED " . $name . " -> " . $tag)
-                            :set logged ($logged + 1)
-                          }
-                          :set adopted ($adopted + 1)
-                        }
-                      } else={
-                        :set skipped ($skipped + 1)
+            :if ([:find $seenNames ("|" . $name . "|")] = -1) do={
+              :set seenNames ($seenNames . $name . "|")
+              :local ids [/ip dns static find where name=$name and address-list=$AddressList and type=FWD and forward-to=$ForwardTo]
+              :if ([:len $ids] > 0) do={
+                :foreach id in=$ids do={
+                  :local comment [/ip dns static get $id comment]
+                  :if ([:pick $comment 0 12] != "dnsfwd:auto:") do={
+                    :if ($DryRun = "true") do={
+                      :if (($VerboseLimit > 0) && ($logged < $VerboseLimit)) do={
+                        :log info ("WOULD ADOPT " . $name . " -> " . $tag)
+                        :set logged ($logged + 1)
                       }
+                      :set wouldAdopt ($wouldAdopt + 1)
+                    } else={
+                      /ip dns static set $id comment=$tag
+                      :if (($VerboseLimit > 0) && ($logged < $VerboseLimit)) do={
+                        :log info ("ADOPTED " . $name . " -> " . $tag)
+                        :set logged ($logged + 1)
+                      }
+                      :set adopted ($adopted + 1)
                     }
                   } else={
                     :set skipped ($skipped + 1)
                   }
                 }
-              }
-
-              :if ($regexp != "") do={
-                :if ([:find $seenRegex ("|" . $regexp . "|")] = -1) do={
-                  :set seenRegex ($seenRegex . $regexp . "|")
-                  :local ids [/ip dns static find where regexp=$regexp and address-list=$AddressList and type=FWD and forward-to=$ForwardTo]
-                  :if ([:len $ids] > 0) do={
-                    :foreach id in=$ids do={
-                      :local comment [/ip dns static get $id comment]
-                      :if ([:pick $comment 0 12] != "dnsfwd:auto:") do={
-                        :if ($DryRun = "true") do={
-                          :if (($VerboseLimit > 0) && ($logged < $VerboseLimit)) do={
-                            :log info ("WOULD ADOPT " . $regexp . " -> " . $tag)
-                            :set logged ($logged + 1)
-                          }
-                          :set wouldAdopt ($wouldAdopt + 1)
-                        } else={
-                          /ip dns static set $id comment=$tag
-                          :if (($VerboseLimit > 0) && ($logged < $VerboseLimit)) do={
-                            :log info ("ADOPTED " . $regexp . " -> " . $tag)
-                            :set logged ($logged + 1)
-                          }
-                          :set adopted ($adopted + 1)
-                        }
-                      } else={
-                        :set skipped ($skipped + 1)
-                      }
-                    }
-                  } else={
-                    :set skipped ($skipped + 1)
-                  }
-                }
+              } else={
+                :set skipped ($skipped + 1)
               }
             }
+
+            :set pos ($end + 1)
+          }
+
+          :set pos 0
+          :while (true) do={
+            :local idx [:find $content "regexp=\"" $pos]
+            :if ($idx = -1) do={ :break }
+            :local start ($idx + 8)
+            :local end [:find $content "\"" $start]
+            :if ($end = -1) do={ :break }
+            :local regexp [:pick $content $start $end]
+
+            :if (($VerboseLimit > 0) && (!$debugLogged)) do={
+              :log info ("DEBUG extracted regexp=" . $regexp)
+              :set debugLogged true
+            }
+
+            :if ([:find $seenRegex ("|" . $regexp . "|")] = -1) do={
+              :set seenRegex ($seenRegex . $regexp . "|")
+              :local ids [/ip dns static find where regexp=$regexp and address-list=$AddressList and type=FWD and forward-to=$ForwardTo]
+              :if ([:len $ids] > 0) do={
+                :foreach id in=$ids do={
+                  :local comment [/ip dns static get $id comment]
+                  :if ([:pick $comment 0 12] != "dnsfwd:auto:") do={
+                    :if ($DryRun = "true") do={
+                      :if (($VerboseLimit > 0) && ($logged < $VerboseLimit)) do={
+                        :log info ("WOULD ADOPT " . $regexp . " -> " . $tag)
+                        :set logged ($logged + 1)
+                      }
+                      :set wouldAdopt ($wouldAdopt + 1)
+                    } else={
+                      /ip dns static set $id comment=$tag
+                      :if (($VerboseLimit > 0) && ($logged < $VerboseLimit)) do={
+                        :log info ("ADOPTED " . $regexp . " -> " . $tag)
+                        :set logged ($logged + 1)
+                      }
+                      :set adopted ($adopted + 1)
+                    }
+                  } else={
+                    :set skipped ($skipped + 1)
+                  }
+                }
+              } else={
+                :set skipped ($skipped + 1)
+              }
+            }
+
+            :set pos ($end + 1)
           }
         }
       }
