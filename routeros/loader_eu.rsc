@@ -1,6 +1,6 @@
 # Define global variables
-:global AddressList "blacklist_eu"
-:global ForwardTo "fakeipEU"
+:global AddressList "example_list"
+:global ForwardTo "example_dns"
 :global SyncMode "add"
 
 # List of resources corresponding to RSC files
