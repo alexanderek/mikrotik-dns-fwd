@@ -1,8 +1,8 @@
 # for_scripts index
 
-Generated at (UTC): 2026-01-21T02:31:31Z
+Generated at (UTC): 2026-01-22T02:33:42Z
 
-Total files: 3010
+Total files: 3009
 
 Files:
 - [10minutemail.rsc](10minutemail.rsc)
@@ -1375,7 +1375,6 @@ Files:
 - [cn_part761.rsc](cn_part761.rsc)
 - [cn_part762.rsc](cn_part762.rsc)
 - [cn_part763.rsc](cn_part763.rsc)
-- [cn_part764.rsc](cn_part764.rsc)
 - [cn_part77.rsc](cn_part77.rsc)
 - [cn_part78.rsc](cn_part78.rsc)
 - [cn_part79.rsc](cn_part79.rsc)
