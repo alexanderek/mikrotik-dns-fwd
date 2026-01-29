@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-01-28T02:34:08Z",
-  "count": 2997,
+  "generated_at": "2026-01-29T02:50:08Z",
+  "count": 3019,
   "files": [
     { "name": "10minutemail.rsc", "bytes": 437 }
 ,
@@ -182,6 +182,8 @@
 ,
     { "name": "amd@cn.rsc", "bytes": 212 }
 ,
+    { "name": "amedia.rsc", "bytes": 230 }
+,
     { "name": "amp.rsc", "bytes": 1105 }
 ,
     { "name": "amp@cn.rsc", "bytes": 226 }
@@ -194,7 +196,15 @@
 ,
     { "name": "anexia.rsc", "bytes": 2044 }
 ,
+    { "name": "anidub.rsc", "bytes": 407 }
+,
+    { "name": "anilibria.rsc", "bytes": 609 }
+,
     { "name": "anime.rsc", "bytes": 3251 }
+,
+    { "name": "animego.rsc", "bytes": 233 }
+,
+    { "name": "animevost.rsc", "bytes": 425 }
 ,
     { "name": "annas-archive.rsc", "bytes": 643 }
 ,
@@ -284,6 +294,8 @@
 ,
     { "name": "arphic.rsc", "bytes": 598 }
 ,
+    { "name": "art.rsc", "bytes": 4255 }
+,
     { "name": "artstation.rsc", "bytes": 441 }
 ,
     { "name": "asahi.rsc", "bytes": 1319 }
@@ -365,6 +377,8 @@
     { "name": "barrons.rsc", "bytes": 819 }
 ,
     { "name": "basecamp.rsc", "bytes": 610 }
+,
+    { "name": "bato.rsc", "bytes": 222 }
 ,
     { "name": "bbc.rsc", "bytes": 4259 }
 ,
@@ -2864,6 +2878,8 @@
 ,
     { "name": "creativecommons.rsc", "bytes": 869 }
 ,
+    { "name": "crunchyroll.rsc", "bytes": 419 }
+,
     { "name": "csdn.rsc", "bytes": 1453 }
 ,
     { "name": "csis.rsc", "bytes": 411 }
@@ -2895,6 +2911,8 @@
     { "name": "dailymail.rsc", "bytes": 813 }
 ,
     { "name": "dailymotion.rsc", "bytes": 611 }
+,
+    { "name": "danbooru.donmai.rsc", "bytes": 237 }
 ,
     { "name": "dandanzan.rsc", "bytes": 415 }
 ,
@@ -3293,6 +3311,8 @@
     { "name": "gateio.rsc", "bytes": 950 }
 ,
     { "name": "geetest.rsc", "bytes": 233 }
+,
+    { "name": "gelbooru.rsc", "bytes": 236 }
 ,
     { "name": "gemfury.rsc", "bytes": 1103 }
 ,
@@ -3866,6 +3886,8 @@
 ,
     { "name": "hdrezka.rsc", "bytes": 2413 }
 ,
+    { "name": "hentaichan.rsc", "bytes": 244 }
+,
     { "name": "hentaichen.rsc", "bytes": 1179 }
 ,
     { "name": "hentaivn.rsc", "bytes": 417 }
@@ -4036,6 +4058,8 @@
 ,
     { "name": "imperialcollege.rsc", "bytes": 451 }
 ,
+    { "name": "infinitenovel.rsc", "bytes": 249 }
+,
     { "name": "infowars.rsc", "bytes": 612 }
 ,
     { "name": "infrapedia.rsc", "bytes": 242 }
@@ -4166,6 +4190,8 @@
 ,
     { "name": "justmysocks.rsc", "bytes": 827 }
 ,
+    { "name": "jut.rsc", "bytes": 409 }
+,
     { "name": "jutongbao.rsc", "bytes": 431 }
 ,
     { "name": "jwplayer.rsc", "bytes": 1153 }
@@ -4175,6 +4201,8 @@
     { "name": "kakao.rsc", "bytes": 7737 }
 ,
     { "name": "kanzhongguo.rsc", "bytes": 2519 }
+,
+    { "name": "kara.rsc", "bytes": 222 }
 ,
     { "name": "kasparov.rsc", "bytes": 234 }
 ,
@@ -4221,6 +4249,8 @@
     { "name": "knovel.rsc", "bytes": 230 }
 ,
     { "name": "kodi.rsc", "bytes": 395 }
+,
+    { "name": "kodik.rsc", "bytes": 1315 }
 ,
     { "name": "konachan.rsc", "bytes": 419 }
 ,
@@ -4379,6 +4409,10 @@
     { "name": "mainichi.rsc", "bytes": 1955 }
 ,
     { "name": "make.rsc", "bytes": 224 }
+,
+    { "name": "mangahub.rsc", "bytes": 234 }
+,
+    { "name": "mangapark.rsc", "bytes": 239 }
 ,
     { "name": "manhuagui.rsc", "bytes": 239 }
 ,
@@ -5054,6 +5088,8 @@
 ,
     { "name": "rubychina.rsc", "bytes": 435 }
 ,
+    { "name": "rulate.rsc", "bytes": 228 }
+,
     { "name": "rule34.rsc", "bytes": 230 }
 ,
     { "name": "ruleoflaw.rsc", "bytes": 435 }
@@ -5137,6 +5173,8 @@
     { "name": "sharepoint.rsc", "bytes": 443 }
 ,
     { "name": "sharethis.rsc", "bytes": 239 }
+,
+    { "name": "shikimori.rsc", "bytes": 239 }
 ,
     { "name": "shireyishunjian.rsc", "bytes": 451 }
 ,
@@ -5680,6 +5718,8 @@
 ,
     { "name": "vmware.rsc", "bytes": 19260 }
 ,
+    { "name": "vndb.rsc", "bytes": 224 }
+,
     { "name": "voanews.rsc", "bytes": 9003 }
 ,
     { "name": "vodafone.rsc", "bytes": 429 }
@@ -5912,6 +5952,8 @@
 ,
     { "name": "youmind.rsc", "bytes": 415 }
 ,
+    { "name": "younettranslate.rsc", "bytes": 257 }
+,
     { "name": "youporn.rsc", "bytes": 1535 }
 ,
     { "name": "youquan.rsc", "bytes": 1309 }
@@ -5929,6 +5971,8 @@
     { "name": "yuewen.rsc", "bytes": 1652 }
 ,
     { "name": "yuketang.rsc", "bytes": 246 }
+,
+    { "name": "yummyanime.rsc", "bytes": 437 }
 ,
     { "name": "yundaex.rsc", "bytes": 1147 }
 ,
