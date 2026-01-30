@@ -13,6 +13,36 @@ certain domains to a specific resolver).
 - RouterOS downloads and applies those files; RouterOS is not the source of
   truth.
 
+## Quick start
+
+1) Pick loaders and edit variables  
+Use the example loaders in `routeros/` as a starting point (copy/rename as
+needed) and set:
+`AddressList`, `ForwardTo`, `SyncMode` (`add` or `sync`), `baseUrl`, and the
+resources list inside the loader.
+
+2) Import the loader script(s) into RouterOS  
+```routeros
+/import file-name=loader_eu.rsc
+```
+
+3) Run once manually  
+```routeros
+/system script run dns_fwd_auto_eu
+```
+
+4) Add scheduler (weekly)  
+```routeros
+/system scheduler
+add name=dnsfwd-eu interval=7d on-event="/system/script/run dns_fwd_auto_eu"
+```
+
+5) Verify  
+```routeros
+/ip dns static print where comment~"dnsfwd:auto:"
+/ip dns static print count-only where comment~"dnsfwd:auto:"
+```
+
 ## Managed rule namespace
 
 Automatically managed rules use a comment prefix:
@@ -40,15 +70,20 @@ The loader supports two modes:
   - Adds missing entries only.
   - Never deletes anything.
 - `SyncMode="sync"`
-  - Removes only entries that match `dnsfwd:auto:*` within the current
-    `AddressList`.
+  - Removes only entries whose comment starts with `dnsfwd:auto:` and only
+    within the current `AddressList`.
   - Then applies the freshly downloaded list.
-  - Manual rules are preserved.
+  - Manual rules are not touched.
 
 ## Multiple regions / forwarders
 
 You can run multiple loaders with different parameters. This is useful when
 separate domain sets should be forwarded to different resolvers.
+
+Prebuilt example loaders (copy/rename and adjust):
+
+- `routeros/loader_eu.rsc`
+- `routeros/loader_ru.rsc`
 
 ## Loader example
 
@@ -57,7 +92,7 @@ separate domain sets should be forwarded to different resolvers.
 :global ForwardTo "dns_example_a"
 :global SyncMode "sync"
 
-:local baseUrl "https://raw.githubusercontent.com/alexanderek/MikroTik_DNS_FWD/refs/heads/main/for_scripts"
+:local baseUrl "https://raw.githubusercontent.com/alexanderek/MikroTik_DNS_FWD/main/for_scripts"
 ```
 
 ## Scheduler example
