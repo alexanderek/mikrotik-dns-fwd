@@ -1,0 +1,5 @@
+:global AddressList
+:global ForwardTo
+/ip dns static
+:if ([:len [find name="filmix.biz"]] = 0) do={ add address-list=$AddressList forward-to=$ForwardTo comment="dnsfwd:auto:filmix" match-subdomain=yes type=FWD name="filmix.biz" }
+:if ([:len [find name="filmix.fm"]] = 0) do={ add address-list=$AddressList forward-to=$ForwardTo comment="dnsfwd:auto:filmix" match-subdomain=yes type=FWD name="filmix.fm" }
