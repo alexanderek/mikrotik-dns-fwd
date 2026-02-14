@@ -1,8 +1,8 @@
 # for_scripts index
 
-Generated at (UTC): 2026-02-13T03:21:03Z
+Generated at (UTC): 2026-02-14T02:51:27Z
 
-Total files: 2934
+Total files: 2938
 
 Files:
 - [10minutemail.rsc](10minutemail.rsc)
@@ -416,6 +416,7 @@ Files:
 - [category-entertainment@cn.rsc](category-entertainment@cn.rsc)
 - [category-entertainment_part1.rsc](category-entertainment_part1.rsc)
 - [category-entertainment_part10.rsc](category-entertainment_part10.rsc)
+- [category-entertainment_part11.rsc](category-entertainment_part11.rsc)
 - [category-entertainment_part2.rsc](category-entertainment_part2.rsc)
 - [category-entertainment_part3.rsc](category-entertainment_part3.rsc)
 - [category-entertainment_part4.rsc](category-entertainment_part4.rsc)
@@ -622,6 +623,7 @@ Files:
 - [clearasil.rsc](clearasil.rsc)
 - [clearbit.rsc](clearbit.rsc)
 - [clearbit@ads.rsc](clearbit@ads.rsc)
+- [clickup.rsc](clickup.rsc)
 - [clips4sale.rsc](clips4sale.rsc)
 - [cloudcone.rsc](cloudcone.rsc)
 - [cloudconvert.rsc](cloudconvert.rsc)
@@ -1891,6 +1893,7 @@ Files:
 - [gordonua.rsc](gordonua.rsc)
 - [gracg.rsc](gracg.rsc)
 - [grammarly.rsc](grammarly.rsc)
+- [grapheneos.rsc](grapheneos.rsc)
 - [gravatar.rsc](gravatar.rsc)
 - [greatfire.rsc](greatfire.rsc)
 - [gree.rsc](gree.rsc)
@@ -2865,6 +2868,7 @@ Files:
 - [xhamsterlive.rsc](xhamsterlive.rsc)
 - [xiaoheihe.rsc](xiaoheihe.rsc)
 - [xiaohongshu.rsc](xiaohongshu.rsc)
+- [xiaohongshu@!cn.rsc](xiaohongshu@!cn.rsc)
 - [xiaomi-ai.rsc](xiaomi-ai.rsc)
 - [xiaomi-iot.rsc](xiaomi-iot.rsc)
 - [xiaomi.rsc](xiaomi.rsc)
