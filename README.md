@@ -92,7 +92,7 @@ Prebuilt example loaders (copy/rename and adjust):
 :global ForwardTo "dns_example_a"
 :global SyncMode "sync"
 
-:local baseUrl "https://raw.githubusercontent.com/alexanderek/MikroTik_DNS_FWD/main/for_scripts"
+:local baseUrl "https://raw.githubusercontent.com/alexanderek/mikrotik-dns-fwd/main/for_scripts"
 ```
 
 ## Scheduler example

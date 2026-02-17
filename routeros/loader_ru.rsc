@@ -17,7 +17,7 @@
 }
 
 # Base URL for RSC files
-:local baseUrl "https://raw.githubusercontent.com/alexanderek/MikroTik_DNS_FWD/refs/heads/main/for_scripts"
+:local baseUrl "https://raw.githubusercontent.com/alexanderek/mikrotik-dns-fwd/refs/heads/main/for_scripts"
 
 :foreach resource in=$resources do={
   :local cleaned false
