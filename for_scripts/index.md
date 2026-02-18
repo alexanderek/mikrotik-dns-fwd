@@ -1,8 +1,8 @@
 # for_scripts index
 
-Generated at (UTC): 2026-02-17T03:12:51Z
+Generated at (UTC): 2026-02-18T03:16:20Z
 
-Total files: 2939
+Total files: 2944
 
 Files:
 - [10minutemail.rsc](10minutemail.rsc)
@@ -100,6 +100,8 @@ Files:
 - [anime.rsc](anime.rsc)
 - [animego.rsc](animego.rsc)
 - [animevost.rsc](animevost.rsc)
+- [anker.rsc](anker.rsc)
+- [anker@!cn.rsc](anker@!cn.rsc)
 - [annas-archive.rsc](annas-archive.rsc)
 - [anon-v.rsc](anon-v.rsc)
 - [anthropic.rsc](anthropic.rsc)
@@ -2702,6 +2704,7 @@ Files:
 - [tld-!cn_part6.rsc](tld-!cn_part6.rsc)
 - [tld-cn.rsc](tld-cn.rsc)
 - [tld-opennic.rsc](tld-opennic.rsc)
+- [tld-ru.rsc](tld-ru.rsc)
 - [tmdb.rsc](tmdb.rsc)
 - [tmtpost.rsc](tmtpost.rsc)
 - [tokyo-sports.rsc](tokyo-sports.rsc)
@@ -2895,6 +2898,7 @@ Files:
 - [ynoproject.rsc](ynoproject.rsc)
 - [yokaverse.rsc](yokaverse.rsc)
 - [yomiuri.rsc](yomiuri.rsc)
+- [yostar.rsc](yostar.rsc)
 - [youjizz.rsc](youjizz.rsc)
 - [youku.rsc](youku.rsc)
 - [youku@ads.rsc](youku@ads.rsc)
@@ -2939,6 +2943,7 @@ Files:
 - [zona.rsc](zona.rsc)
 - [zoom.rsc](zoom.rsc)
 - [zotero.rsc](zotero.rsc)
+- [zscaler.rsc](zscaler.rsc)
 - [zte.rsc](zte.rsc)
 - [zto-express.rsc](zto-express.rsc)
 - [zuoyebang.rsc](zuoyebang.rsc)
