@@ -1,8 +1,8 @@
 # for_scripts index
 
-Generated at (UTC): 2026-02-24T03:13:24Z
+Generated at (UTC): 2026-02-25T03:14:05Z
 
-Total files: 2949
+Total files: 2950
 
 Files:
 - [10minutemail.rsc](10minutemail.rsc)
@@ -2233,6 +2233,7 @@ Files:
 - [misskey-universe.rsc](misskey-universe.rsc)
 - [misskey.rsc](misskey.rsc)
 - [mit.rsc](mit.rsc)
+- [mixi.rsc](mixi.rsc)
 - [mobile01.rsc](mobile01.rsc)
 - [mocha.rsc](mocha.rsc)
 - [modrinth.rsc](modrinth.rsc)
